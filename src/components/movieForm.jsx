@@ -5,7 +5,7 @@ class MovieForm extends Component {
     const { match, history } = this.props;
     return (
       <div>
-        <h1>Movie Form - {match.params.id} </h1>
+        <h1>Movie Form</h1>
         <button
           className="btn btn-primary"
           onClick={() => history.push("/movies")}
