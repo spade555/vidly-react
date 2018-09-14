@@ -30,8 +30,6 @@ class Movies extends Component {
       this.setState({ movies });
     }
   };
-    this.setState({ movies });
-  };
 
   handleLike = movie => {
     const movies = [...this.state.movies];
@@ -74,7 +72,6 @@ class Movies extends Component {
   };
 
   render() {
-    const { history } = this.props;
     const { length: count } = this.state.movies;
     const { genres, pageSize, currentPage, sortColumn } = this.state;
 
@@ -92,12 +89,13 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <button
-            className="btn btn-primary m-2"
-            onClick={() => history.push("/movies/new")}
+          <Link
+            to="/movies/new"
+            className="btn btn-primary"
+            style={{ marginBottom: 20 }}
           >
             New Movie
-          </button>
+          </Link>
           <p>Showing {totalCount} movies in the database.</p>
           <MoviesTable
             movies={movies}
