@@ -64,8 +64,13 @@ class MovieForm extends Form {
     };
   }
 
-  doSubmit = () => {
-    saveMovie(this.state.data);
+  doSubmit = async () => {
+    const movieId = this.props.match.params.id;
+    const movie = { ...this.state.data };
+    if (movieId !== "new") {
+      movie["_id"] = movieId;
+    }
+    await saveMovie(movie);
     this.props.history.push("/movies");
   };
 
