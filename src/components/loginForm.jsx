@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import * as authService from "../services/authService";
 
 class LoginForm extends Form {
   state = {
@@ -17,8 +18,17 @@ class LoginForm extends Form {
       .label("Password")
   };
 
-  doSubmit = () => {
-    console.log("Submitted.");
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      await authService.login(data.username, data.password);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {
